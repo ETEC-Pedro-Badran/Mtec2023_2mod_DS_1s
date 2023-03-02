@@ -1,1 +1,2 @@
 1- Faça um programa que imprima os meses.
+2- Escreva a frase digitada de traz para frente
