@@ -1,0 +1,6 @@
+- Faça uma lista de valores separados por virgula, 
+divida-os em um array e some os valores.
+
+
+- Digite letras e coloque em ordem alfabetica.
+

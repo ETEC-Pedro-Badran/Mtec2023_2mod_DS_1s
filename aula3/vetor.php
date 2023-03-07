@@ -7,21 +7,22 @@
     <title>Estrutura Repetição </title>
 </head>
 <body>
-    <h1>Estrutura de Repetição While</h1>
-    <h2>Trabalhando com Strings</h2>
+    <h1>Estrutura de Repetição </h1>
+    <h2>Trabalhando com Arrays</h2>
    <form>
-          Digite uma frase <input type="text" name="str">
+          Digite uma frase <input type="text" name="frase">
        <p><input type="submit">
    </form>
 
    <?php
-        $str   =    @$_GET['str']; 
-        $comprimento = strlen($str)-1;
-        while($comprimento >= 0) {
-            echo $str[$comprimento]; 
-            $comprimento--;
-        }
+        $frase = @$_GET['frase'];
+        $palavras = explode(" ",$frase);
+        //var_dump($palavras);
 
+        
+        for($comprimento = count($palavras)-1;$comprimento>=0;$comprimento--) {
+            echo $palavras[$comprimento]." "; 
+        }
 
         
 

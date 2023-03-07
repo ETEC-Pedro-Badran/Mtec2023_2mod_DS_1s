@@ -7,7 +7,7 @@
     <title>Estrutura Repetição </title>
 </head>
 <body>
-    <h1>Estrutura de Repetição While</h1>
+    <h1>Estrutura de Repetição FOR</h1>
     <h2>Trabalhando com Strings</h2>
    <form>
           Digite uma frase <input type="text" name="str">
@@ -16,12 +16,9 @@
 
    <?php
         $str   =    @$_GET['str']; 
-        $comprimento = strlen($str)-1;
-        while($comprimento >= 0) {
+        for($comprimento = strlen($str)-1;$comprimento>0;$comprimento--) {
             echo $str[$comprimento]; 
-            $comprimento--;
         }
-
 
         
 
