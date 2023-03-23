@@ -1,0 +1,8 @@
+1. Construa uma classe que defina os atributos de um Pokemon e o que ele
+faz (método).
+
+2. Construir um array com pelo menos 3 pokemons (objetos de Pokemon).
+
+3. Criar uma tabela para listar os pokemons utilizando um for ou foreach.
+
+
