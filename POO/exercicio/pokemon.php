@@ -3,14 +3,18 @@ class Pokemon {
     public $numero;
     public $nome;
     public $total;
+    
+    public $level;
+    public $atacks; // Lista de ataques que o pockemon;
 
 
-    function __construct($numero, $nome, $total){
-      $this->numero = $numero;
-      $this->nome = $nome;
-      $this->total = $total;
-
-
+    function atack($oponente,$atack){
+      
+      $critical = $atack->critical();
+      $power = ;
+      $dano = ((($critical*$this->level*2)/5)+2)  
     }
+
+
 
 }
