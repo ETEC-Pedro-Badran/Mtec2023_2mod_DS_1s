@@ -1,9 +1,10 @@
 <?php
 class Atack  {
      
+
    public $tipo;
-   public $power;
-   public $precisao;
+   public $movimento;
+   
 
    function __construct()
    {
