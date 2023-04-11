@@ -1,4 +1,5 @@
 <?php
+require "atack.php";
 class Pokemon {
     public $numero;
     public $nome;
@@ -11,7 +12,8 @@ class Pokemon {
 
     
     public $level;
-    public $atacks; // Lista de ataques que o pockemon;
+    public $atacks = []; // Lista de ataques que o pockemon;
+    public $movimentos = [];
 
     function __construct($numero, $nome, $total,$defesa,$ataque,$hp,$spAtaque,$spdefesa){
       $this->numero = $numero;
@@ -24,16 +26,32 @@ class Pokemon {
       $this->spdefesa = $spdefesa;
     }
 
-
-    function atack($oponente,$atack){
-      
-      $critical = $atack->critical();
-      $power = 0; // <<<< ????
-      $dano = ((($critical*$this->level*2)/5)+2) * $power; 
+    function getD(){
+      return 0;
+    }  
+    function getA($atack){
+      $stat = 0;
+      if ($atack->movimento->type == TipoMovimento::Fisico) {
+          $stat = $this->ataque;
+      } if ($atack->movimento->type == TipoMovimento::Especial) {
+          $stat = $this->spataque;
+      }
+      if ($this->getD()>255) {
+        $stat/=4;
+      }
+      return $stat;
     }
 
-
-
+    function atack($oponente,Atack $atack){
+      
+      $critical = $atack->critical();
+      
+      $a = 0;
+      
+      $dano = ((($critical*$this->level*2)/5)+2) * 
+              $atack->movimento->power*
+              $this->getA($atack);
+    }
 }
 
 //https://bulbapedia.bulbagarden.net/wiki/Damage#Damage_calculation
