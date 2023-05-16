@@ -63,7 +63,8 @@
         estivesse clicando no botão de "enviar' -->
         <?php
          foreach($marcas as $marca) {
-            echo  "<option>$marca</option>";
+            $selecionado = $marca==$brand_selecionado?'selected':'';
+            echo  "<option value='$marca' $selecionado> $marca</option>";
          }
         ?>      
 
