@@ -42,11 +42,20 @@
         .anuncio {
             display: inline-block;
             width: 150px;
-            height: 100px;
-            margin-right: 2px;
-        }
+            /* height: 100px; */
+            margin: 8px;
+            box-shadow: 1px 2px 5px 0px #88888878;
+            border-radius: 10px;
+            padding-left: 12px;
+                }
         img {
             width: 100%;
+        }
+        .cor {
+            height: 18px;
+            width: 18px;
+            display: inline-block;
+            margin-right: 2px;
         }
     </style>
 </head>
@@ -80,8 +89,18 @@
                 "<img src='$produto->image_link'>".
                 "<p>$produto->name".
                 "<p>$produto->brand".
-                "<p>$produto->price".
-                "</div>";
+                "<p>$produto->price";
+
+                echo "<div class='cores'>";
+                foreach($produto->product_colors as $color) {
+                  echo "<div class='cor' style='background-color:$color->hex_value'></div>";                     
+                }
+                echo "</div>"; // div class cor
+
+                echo "</div>"; // div class cores
+                
+               //error_log( print_r($produto->product_colors,true),0);
+
             }
         } else { //3- caso contrário - Mostre uma mensagem para o usuário selecionar uma marca
            echo "<h1>Selecione uma marca</h1>";

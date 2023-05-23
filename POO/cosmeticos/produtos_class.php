@@ -42,8 +42,9 @@ class Product {
         $this->product_api_url = $json_data['product_api_url'];
         $this->api_featured_image = $json_data['api_featured_image'];
         foreach($json_data['product_colors'] as $product_color) {
-           $product_color = new ProductColor();
-           array_push($this->product_colors,$product_color);
+           $color = new ProductColor();
+           $color->__fromJson($product_color);
+           array_push($this->product_colors,$color);
         }
     }
 }
