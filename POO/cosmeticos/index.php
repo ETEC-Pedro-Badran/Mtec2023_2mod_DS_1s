@@ -60,7 +60,7 @@
             echo "<div class='row justify-content-center'>";
             foreach($produtos as $produto) {
 
-                echo "<div class='col-2 shadow-sm rounded p-3 mb-6'>".
+                echo "<div class='col-sm-4 col-md-2 shadow-sm rounded p-3 mb-6'>".
                 "<img  class='img-thumbnail' src='$produto->image_link'>".
                 "<p>$produto->name".
                 "<p>$produto->brand".
@@ -69,7 +69,7 @@
                 echo "<div class='cores'>";
                 foreach($produto->product_colors as $color) {
                   echo "<a href='#!'
-                  data-bs-toggle='tooltip' data-bs-title='$color->colour_name'
+                  data-bs-toggle='tooltip' title='$color->colour_name'
                   ><div class='cor' style='background-color:$color->hex_value' 
                   ></div></a>";                     
                 }
