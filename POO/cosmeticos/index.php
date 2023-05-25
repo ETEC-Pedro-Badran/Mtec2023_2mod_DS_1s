@@ -1,10 +1,8 @@
 <?php
    require('produtos_class.php');
-   $brand_selecionado = @$_GET['brand']; //1 <<<< Esta vai ser a variável que 
-   // que irá armazenar a marca escolhida
+   $brand_selecionado = @$_GET['brand']; 
+   
 
-   //4 <<< Obtendo o parametro brand, a partir da requisição. O @ evita erros caso o parametro não
-   //tiver sido informado
    
 
    $json = file_get_contents('produtos.json');
@@ -32,25 +30,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Mackup</title>
     <style>
-        .container {
-            width: 80%;
-            text-align: center;
-        }
-
-        .anuncio {
-            display: inline-block;
-            width: 150px;
-            /* height: 100px; */
-            margin: 8px;
-            box-shadow: 1px 2px 5px 0px #88888878;
-            border-radius: 10px;
-            padding-left: 12px;
-                }
-        img {
-            width: 100%;
-        }
         .cor {
             height: 18px;
             width: 18px;
@@ -61,39 +43,35 @@
 </head>
 <body>
     <div class="container">
-       <div>  
-
-        <form>
-
-          <select name="brand" onchange="form.submit();"> <!-- 3 <<<< -->
-              <option>Todas</option>
-        <!-- form.submit é um método do framwork form do javascript que permite,entre
-        outras coisas, realizar uma requisição com os dados do formuário como se eu 
-        estivesse clicando no botão de "enviar' -->
-        <?php
-         foreach($marcas as $marca) {
-            $selecionado = $marca==$brand_selecionado?'selected':'';
-            echo  "<option value='$marca' $selecionado> $marca</option>";
-         }
-        ?>      
-
-          </select>  
-        </form>
-       </div> 
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <?=isset($brand_selecionado)?"Marca: $brand_selecionado":'Selecione um marca'?>
+            </button>
+            <ul class="dropdown-menu">
+                <?php foreach($marcas as $marca) { ?>
+                    <li><a class="dropdown-item" href=<?="?brand=$marca"?>><?=$marca?></a></li>
+                <?php } ?>
+            </ul>
+        </div>
    <?php
       if ($brand_selecionado!=null)  { //2- Se não estiver nullo,
                                        //ou seja, se a marca foi escolhida, 
                                        // mostre os produtos
+            echo "<div class='row justify-content-center'>";
             foreach($produtos as $produto) {
-                echo "<div class='anuncio'>".
-                "<img src='$produto->image_link'>".
+
+                echo "<div class='col-2 shadow-sm rounded p-3 mb-6'>".
+                "<img  class='img-thumbnail' src='$produto->image_link'>".
                 "<p>$produto->name".
                 "<p>$produto->brand".
                 "<p>$produto->price";
 
                 echo "<div class='cores'>";
                 foreach($produto->product_colors as $color) {
-                  echo "<div class='cor' style='background-color:$color->hex_value'></div>";                     
+                  echo "<a href='#!'
+                  data-bs-toggle='tooltip' data-bs-title='$color->colour_name'
+                  ><div class='cor' style='background-color:$color->hex_value' 
+                  ></div></a>";                     
                 }
                 echo "</div>"; // div class cor
 
@@ -102,13 +80,17 @@
                //error_log( print_r($produto->product_colors,true),0);
 
             }
+            echo "</div>"; // class row
         } else { //3- caso contrário - Mostre uma mensagem para o usuário selecionar uma marca
            echo "<h1>Selecione uma marca</h1>";
         }
-    
-
-    
    ?>
    </ul>
+    </div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+   <script>
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+   </script>      
 </body>
 </html>
